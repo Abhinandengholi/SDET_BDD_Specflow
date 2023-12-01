@@ -35,28 +35,28 @@ namespace LinkedInTests.StepDefinitions
         }
 
 
-        [When(@"User will enter username")]
-        public void WhenUserWillEnterUsername()
+        [When(@"User will enter username '(.*)'")]
+        public void WhenUserWillEnterUsername(string username)
         {
             DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(driver);
             fluentWait.Timeout = TimeSpan.FromSeconds(5);
-            fluentWait.PollingInterval = TimeSpan.FromMilliseconds(5);
+            fluentWait.PollingInterval = TimeSpan.FromMilliseconds(100);
             fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
             fluentWait.Message = "element not found";
             IWebElement emailInput = fluentWait.Until(driv => driv.FindElement(By.Id("session_key")));
-            emailInput.SendKeys("Aswd@ddd");
+            emailInput.SendKeys(username);
         }
 
-        [When(@"User will enter password")]
-        public void WhenUserWillEnterPassword()
+        [When(@"User will enter password '(.*)'")]
+        public void WhenUserWillEnterPassword(string password)
         {
             DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(driver);
             fluentWait.Timeout = TimeSpan.FromSeconds(5);
-            fluentWait.PollingInterval = TimeSpan.FromMilliseconds(5);
+            fluentWait.PollingInterval = TimeSpan.FromMilliseconds(100);
             fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
             fluentWait.Message = "element not found";
             passwordInput = fluentWait.Until(d => d.FindElement(By.Id("session_password")));
-            passwordInput.SendKeys("234a");
+            passwordInput.SendKeys(password);
             Console.WriteLine(passwordInput.GetAttribute("value"));
         }
 
