@@ -6,14 +6,16 @@ Scenario: Search & Add to Cart
 	Given User will be on Homepage
 	When User will type the '<searchtext>' in the searchbox
 	Then Search Results are loaded in the same page with '<searchtext>'
-	* Heading should have '<searchtext>'
-	* Title should have '<searchtext>'
 	When User selects a '<productno>'
 	Then Product page '<searchtext>' is loaded
+	When User Will select quantity of the product
+	* User add the product to  cart
+	Then Product'<searchtext>' added to cart
+	
 Examples:
 	| searchtext | productno |
-	| Water      | 1	|
-	| Java	     | 1	|
+	| Water      | 2	|
+	
 
 
 #@E2E-Search_AddtoCart

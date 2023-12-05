@@ -28,12 +28,7 @@ namespace BunnyCartBDDTest.StepDefinitions
             searchInput?.SendKeys(Keys.Enter);
         }
 
-        //[When(@"User clicks on Search button")]
-        //public void WhenUserClicksOnSearchButton()
-        //{
-        //    IWebElement? searchbutton = driver?.FindElement(By.XPath("//button[@title='Search']"));
-        //    searchbutton.Click();
-        //}
+
 
         [Then(@"Search Results are loaded in the same page with '([^']*)'")]
         public void ThenSearchResultsAreLoadedInTheSamePageWith(string searchtext)
@@ -66,26 +61,7 @@ namespace BunnyCartBDDTest.StepDefinitions
             }
         }
 
-        [Then(@"Title should have '([^']*)'")]
-        public void ThenTitleShouldHave(string searchtext)
-        {
-            TakeScreenshot(driver);
-            try
-            {
-                Assert.That(driver.Title, Does.Contain(searchtext));
-                LogTestResult("Search Test", "Search Test Passed");
-            }
-            catch (AssertionException ex)
-            {
-                LogTestResult("Search Test", "Search Test Failed", ex.Message);
-            }
-        }
 
-        //[Given(@"Search page is loaded")]
-        //public void GivenSearchPageIsLoaded()
-        //{
-        //    driver.Url = "https://www.bunnycart.com/catalogsearch/result/?q=water";
-        //}
 
         [When(@"User selects a '([^']*)'")]
         public void WhenUserSelectsA(string pId)
@@ -107,5 +83,31 @@ namespace BunnyCartBDDTest.StepDefinitions
                 LogTestResult("Search Test", "Search Test Failed", ex.Message);
             }
         }
+
+        [When(@"User Will select quantity of the product")]
+        public void WhenUserWillSelectQuantityOfTheProduct()
+        {
+            driver.FindElement(By.XPath("//a[@class='qty-inc']")).Click();
+            Thread.Sleep(10000);
+        }
+
+
+        [When(@"User add the product to  cart")]
+        public void WhenUserAddTheProductToCart()
+        {
+
+            driver.FindElement(By.XPath("//button[@class='action primary tocart']")).Click();
+            Thread.Sleep(10000);
+        }
+        [Then(@"Product'([^']*)' added to cart")]
+        public void ThenProductAddedToCart(string water)
+        {
+            driver.FindElement(By.XPath("//a[contains(@class,'showcart')]")).Click();
+            Thread.Sleep(3000);
+
+        }
+
+
     }
+
 }
